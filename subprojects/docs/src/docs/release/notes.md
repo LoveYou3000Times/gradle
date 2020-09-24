@@ -63,6 +63,19 @@ Depending on the version of Java you use, Gradle will negotiate TLS v1.2 or TLS 
 which causes the exception `javax.net.ssl.SSLException: No PSK available. Unable to resume`. If you run into this issue,
 we recommend updating to the latest minor JDK version.
 
+## Configuration cache improvements
+
+### Supported core plugins
+
+In this release a number of core Gradle plugins got improved to support the configuration cache:
+
+* [`checkstyle`](userguide/checkstyle_plugin.html)
+* [`pmd`](userguide/pmd_plugin.html)
+* [`codenarc`](userguide/codenarc_plugin.html)
+* [`jacoco`](userguide/jacoco_plugin.html)
+
+See the [matrix of supported core plugins](userguide/configuration_cache.html#config_cache:plugins:core) in the user manual.
+
 ## Promoted features
 Promoted features are features that were incubating in previous versions of Gradle but are now supported and subject to backwards compatibility.
 See the User Manual section on the “[Feature Lifecycle](userguide/feature_lifecycle.html)” for more information.
