@@ -53,10 +53,10 @@ class RootProject(model: CIBuildModel, functionalTestBucketProvider: FunctionalT
 
     cleanup {
         baseRule {
-            history(days = 7)
+            history(days = 14)
         }
         baseRule {
-            artifacts(days = 7, artifactPatterns = """
+            artifacts(days = 14, artifactPatterns = """
                 +:**/*
                 +:$failedTestArtifactDestination/**/*"
             """.trimIndent())
