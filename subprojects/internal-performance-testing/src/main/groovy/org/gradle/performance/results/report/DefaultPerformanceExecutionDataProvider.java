@@ -18,6 +18,8 @@ package org.gradle.performance.results.report;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.gradle.performance.results.CrossBuildPerformanceTestHistory;
+import org.gradle.performance.results.PerformanceExperiment;
+import org.gradle.performance.results.PerformanceScenario;
 import org.gradle.performance.results.PerformanceTestExecution;
 import org.gradle.performance.results.PerformanceTestHistory;
 import org.gradle.performance.results.ResultsStore;
@@ -62,7 +64,13 @@ public class DefaultPerformanceExecutionDataProvider extends PerformanceExecutio
             .collect(groupingBy(ScenarioBuildResultData::getPerformanceExperiment))
             .values()
             .stream()
-            .map(this::queryAndSortExecutionData).collect(treeSetCollector(SCENARIO_COMPARATOR));
+            .map(this::queryAndSortExecutionData)
+            .peek(result -> {
+                PerformanceExperiment experiment = result.getPerformanceExperiment();
+                PerformanceScenario scenario = experiment.getScenario();
+                System.out.printf("testProject: %s, className: %s, scenario: %s", experiment.getTestProject(), scenario.getClassName(), scenario.getTestName());
+            })
+            .collect(treeSetCollector(SCENARIO_COMPARATOR));
     }
 
     private ScenarioBuildResultData queryAndSortExecutionData(List<ScenarioBuildResultData> scenarios) {
